@@ -1,0 +1,3 @@
+ROOT := ../..
+
+include $(ROOT)/makefile

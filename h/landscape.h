@@ -1,0 +1,48 @@
+#ifndef __COOLWORK_LANDSCAPE__
+#define __COOLWORK_LANDSCAPE__
+
+#include <stddef.h>
+#include <vector>
+
+using namespace std;
+
+struct Bitmap
+{
+  vector<float> data;
+  int width, height;
+};
+
+/////////////////////////////////////////////////////////////////////////
+///Работа с рельефом
+/////////////////////////////////////////////////////////////////////////
+class Landscape
+{
+  public:
+    Landscape  ();
+    ~Landscape ();
+
+    vec2i GetDimensions ();
+    
+/////////////////////////////////////////////////////////////////////////
+///Средства изменения рельефа
+/////////////////////////////////////////////////////////////////////////
+    void PencilExtrusion (int radius, int x, int y, float flow, int mode, struct Bitmap* old_map = NULL);
+    void BrushExtrusion  (int radius, int x, int y, float flow, int mode, struct Bitmap* old_map = NULL);
+    
+/////////////////////////////////////////////////////////////////////////
+///Изменение размера
+/////////////////////////////////////////////////////////////////////////        
+    void resize (size_t width,size_t height);
+    
+/////////////////////////////////////////////////////////////////////////
+///Карта высот для отрисовки
+/////////////////////////////////////////////////////////////////////////    
+    void GetHeightMap (struct HeightMap&);
+    Bitmap GetHeightMap ();
+    
+  private:
+    struct Impl;
+    Impl* impl;     
+};
+
+#endif
